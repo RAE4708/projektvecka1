@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pygame Fighter Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function toggleCheck(event) {
+            event.target.classList.toggle("checked");
+        }
+    </script>
+    <style>
+        .checklist li {
+            cursor: pointer;
+        }
+        .checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Guide: Skapa ett Fightingspel i Pygame med Visual Studio Code</h1>
+        <p>Denna guide hjälper dig att skapa ett enkelt fightingspel med Pygame och Visual Studio Code.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Steg-för-steg-instruktioner</h2>
+            <h3>1. Installera Visual Studio Code och Python</h3>
+            <p>Ladda ner och installera Python från <a href="https://python.org">python.org</a>.</p>
+            <p>Ladda ner och installera Visual Studio Code från <a href="https://code.visualstudio.com">code.visualstudio.com</a>.</p>
+            <p>Öppna Visual Studio Code och installera Python-tillägget via Extensions Marketplace.</p>
+        </section>
+
+        <section>
+            <h3>2. Installera Pygame</h3>
+            <p>Öppna en terminal i Visual Studio Code och skriv:</p>
+            <pre><code>pip install pygame</code></pre>
+        </section>
+
+        <section>
+            <h3>3. Skapa ett nytt projekt</h3>
+            <ul>
+                <li>Skapa en ny mapp för ditt spelprojekt.</li>
+                <li>Öppna mappen i Visual Studio Code.</li>
+                <li>Skapa en ny Python-fil, t.ex. <code>game.py</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>4. Skapa Spelfönstret</h3>
+            <pre><code>import pygame
+pygame.init()
+
+# Definiera skärmstorlek
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 600
+
+# Skapa spel-fönstret
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Brawler")</code></pre>
+        </section>
+
+        <section>
+            <h3>5. Ladda in Grafik och Ljud</h3>
+            <pre><code>bg_image = pygame.image.load("assets/images/background.jpg").convert_alpha()
+sword_fx = pygame.mixer.Sound("assets/audio/sword.wav")</code></pre>
+        </section>
+
+        <section>
+            <h3>6. Skapa en Fighter-klass</h3>
+            <pre><code>class Fighter():
+    def __init__(self, x, y):
+        self.rect = pygame.Rect(x, y, 80, 180)
+        self.health = 100</code></pre>
+        </section>
+
+        <section>
+            <h3>7. Hantera Spelarnas Rörelser</h3>
+            <pre><code>keys = pygame.key.get_pressed()
+if keys[pygame.K_a]:
+    player1.rect.x -= 10
+if keys[pygame.K_d]:
+    player1.rect.x += 10</code></pre>
+        </section>
+
+        <section>
+            <h3>8. Implementera Strider</h3>
+            <pre><code>if player1.rect.colliderect(player2.rect):
+    player2.health -= 10</code></pre>
+        </section>
+
+        <section>
+            <h3>9. Skapa Spelets Huvudloop</h3>
+            <pre><code>running = True
+while running:
+    screen.blit(bg_image, (0, 0))
+    pygame.display.update()</code></pre>
+        </section>
+
+        <section>
+            <h3>10. Hantera Händelser och Avsluta Spelet</h3>
+            <pre><code>for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        running = False
+pygame.quit()</code></pre>
+        </section>
+
+        <section>
+            <h2>Checklista</h2>
+            <ul class="checklist">
+                <li onclick="toggleCheck(event)">Har du installerat Python och Visual Studio Code?</li>
+                <li onclick="toggleCheck(event)">Är Python-tillägget installerat i Visual Studio Code?</li>
+                <li onclick="toggleCheck(event)">Har du installerat Pygame med <code>pip install pygame</code>?</li>
+                <li onclick="toggleCheck(event)">Har du skapat en projektmapp och en Python-fil?</li>
+                <li onclick="toggleCheck(event)">Kan du skapa och visa spelfönstret?</li>
+                <li onclick="toggleCheck(event)">Är bakgrundsbilden och ljudet laddade korrekt?</li>
+                <li onclick="toggleCheck(event)">Fungerar Fighter-klassen?</li>
+                <li onclick="toggleCheck(event)">Kan spelarna röra sig?</li>
+                <li onclick="toggleCheck(event)">Kan spelarna attackera varandra?</li>
+                <li onclick="toggleCheck(event)">Är spelets huvudloop igång?</li>
+                <li onclick="toggleCheck(event)">Kan spelet avslutas korrekt?</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Vanliga Frågor (FAQ)</h2>
+            <details>
+                <summary>Spelet startar inte, vad gör jag?</summary>
+                <p>Kontrollera att du har installerat Pygame med <code>pip install pygame</code>.</p>
+            </details>
+            <details>
+                <summary>Varför rör sig inte min spelare?</summary>
+                <p>Se till att du har rätt tangentbordshantering och att <code>pygame.key.get_pressed()</code> används korrekt.</p>
+            </details>
+            <details>
+                <summary>Ljudet fungerar inte, vad kan vara fel?</summary>
+                <p>Dubbelkolla att ljudfilerna finns på rätt plats och att Pygame Mixer är initierad.</p>
+            </details>
+            <details>
+                <summary>Hur kan jag lägga till fler animationer?</summary>
+                <p>Lägg till fler sprites i en spritesheet och justera animationerna i din Fighter-klass.</p>
+            </details>
+            <details>
+                <summary>Kan jag använda andra bilder och ljud?</summary>
+                <p>Ja! Byt ut filerna i <code>assets/</code>-mappen och uppdatera din kod.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Pygame Guide</p>
+    </footer>
+</body>
+</html>
